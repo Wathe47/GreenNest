@@ -1,25 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
 import Box from "@mui/system/Box";
-import { useDispatch } from "react-redux";
+import React from "react";
 
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExploreIcon from "@mui/icons-material/Explore";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import LoginIcon from "@mui/icons-material/Login";
-import InfoIcon from "@mui/icons-material/Info";
-import HomeIcon from '@mui/icons-material/Home';
-import { getToken } from "../Auth/getToken";
-import { useAuthContext } from "@asgardeo/auth-react";
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
-// import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+import { Badge } from "@mui/material";
 import "./styles.css";
-import { Button } from "@mui/material";
+import logo1 from '../../resources/logo1.png'
 
 
 const mode = "light"; // Replace with your desired mode (either "dark" or "light")
@@ -36,140 +28,22 @@ const Item = styled(Link)(({ theme }) => ({
    display: "flex",
    justifyContent: "center",
    alignItems: "center",
-   transition: "color 0.3s", // Add color transition
+   transition: "color 0.3s", // Add color transition for text
    "&:hover": {
-      color: "#94ba20", // Change text color on hover
+     color: "#007F12 ", // Change text color on hover
+     "& svg": { // Target the icon class from MUI
+       color: "#007F12", // Change icon color on hover
+       transition: "color 0.3s", // Add color transition for icons
+     },
    },
-}));
-
-const IconItem = styled(Item)(({ theme }) => ({
-   "&:hover": {
-      opacity: 1,
-      color: "#94ba20",
-   },
-   "&:hover svg": { // Add hover effect for the svg icon
-      color: "#94ba20", // Change the color to green on hover
-   },
-}));
-
-
-
-const DropdownContent = styled("div")(({ theme }) => ({
-   display: "none",
-   position: "absolute",
-   backgroundColor: "#f5f5f5",
-   borderRadius: "10px",
-   minWidth: "250px",
-   textAlign: "left",
-   zIndex: 1,
-   top: "100px",
-   opacity: 0,
-   "&.show": {
-      opacity: 1,
-      display: "block", // Display the content when shown
-   },
-}));
-
-const DropdownItem = styled("div")(({ theme }) => ({
-   padding: "6px 12px",
-   textDecoration: "none",
-   display: "block",
-   borderRadius: "10px",
-   fontSize: "13px",
-   marginTop: "5px",
-
-   color: "black",
-   "&:hover": {
-      backgroundColor: "#e1e1e1",
-   },
-}));
-
-const ProfileContainer = styled("div")(({ theme }) => ({
-   position: "relative", // Ensure the container is relatively positioned
-}));
-
-
+ }));
+ 
 
 
 const Navbar = () => {
 
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
 
-   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-   const { state, getBasicUserInfo, signOut } = useAuthContext();
-   const [userDetails, setUserDetails] = useState();
-
-   useEffect(() => {
-      if (state?.isAuthenticated) {
-         getBasicUserInfo()
-            .then((response) => {
-               setUserDetails(response);
-               window.localStorage.setItem("user", JSON.stringify(response));
-            })
-            .catch((error) => {
-               console.error("Failed to load response " + error);
-            });
-      }
-   }, [getBasicUserInfo]);
-
-
-   const handleSignOut = () => {
-      if (state?.isAuthenticated) {
-         signOut();
-         window.localStorage.clear();
-         navigate("/home");
-      }
-      window.location.reload();
-   }
-
-   const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-   };
-
-   // const role = userDetails?.groups?.includes("ADMIN") ? "ADMIN" : "USER";
-   let role;
-   if (userDetails?.groups?.includes("ADMIN")) {
-      role = "ADMIN";
-   } else if (userDetails?.groups?.includes("MANUFACTURER")) {
-      role = "MANUFACTURER";
-   } else {
-      role = "USER";
-   }
-
-   console.log(userDetails);
-   console.log(role);
-
-   const renderComponentOrder = () => {
-      switch (role) {
-         case "ADMIN":
-            return "admin-orders";
-         case "MANUFACTURER":
-            return "seller-orders";
-         default:
-            return "user-orders";
-      }
-   };
-
-   const componentToRenderOrder = renderComponentOrder();
-
-   const renderComponentExplore = () => {
-      switch (role) {
-         case "ADMIN":
-            return "explore";
-         case "MANUFACTURER":
-            return "addproductdetails";
-         default:
-            return "explore";
-      }
-   };
-
-   const componentToRenderExplore = renderComponentExplore();
-
-
-   const authNavItems = (
+   const navItems = (
       <Grid
          width={{ xs: "100%", sm: "100%", md: "100%" }}
          container
@@ -178,7 +52,7 @@ const Navbar = () => {
          columns={{ xs: 12, sm: 16, md: 24 }}
       >
          <Grid
-            xs={4} sm={8} md={14}
+            xs={4} sm={8} md={16}
             container
             direction="row"
             justifyContent="flex-start"
@@ -186,15 +60,14 @@ const Navbar = () => {
          >
             <Link to='/'>
                <img
-                  src="https://res.cloudinary.com/dl8dikngu/image/upload/v1716972002/Screenshot_from_2024-05-29_14-09-50_hzcjje.png"
-
-                  alt="iTeaLogo"
-                  width="160px"
+                  src={logo1}
+                  alt="GreenNest"
+                  height="45px"
 
                   style={{
-                     marginTop: "15%",
-                     marginBottom: "10%",
-                     marginLeft: "100%",
+                     marginTop: "9%",
+                     marginBottom: "7%",
+                     marginLeft: "70%",
                      objectFit: "cover",
                      position: "relative",
                      top: "0px",
@@ -203,67 +76,66 @@ const Navbar = () => {
             </Link>
          </Grid>
          <Grid
-            xs={4} sm={8} md={9}
+            xs={4} sm={8} md={7}
             container
-            columns={{ xs: 3, sm: 6, md: 9 }}
+            columns={{ xs: 3, sm: 6, md: 10 }}
          >
             <Grid
-               xs={1} sm={2} md={2}
+               xs={1} sm={2} md={3}
                container
                direction="row"
-               justifyContent="flex-end"
+               justifyContent="flex-start"
                alignItems="center"
 
             >
                <Item to='/' style={{ marginLeft: "10%" }}>
-                  <HomeIcon
-                     style={{ marginRight: "5px", color: "black", fontSize: "25px" }}
+                  <InventoryIcon
+                     style={{ marginRight: "5px", fontSize: "25px"}}
                   />
-                  
-                  <span className="icon-text">
-                     HOME
-                  </span>
-               </Item>
-            </Grid>
-            <Grid
-               xs={1} sm={2} md={2}
-               container
-               direction="row"
-               justifyContent="flex-end"
-               alignItems="center"
 
-            >
-               <Item to={componentToRenderExplore} style={{ marginLeft: "10%" }}>
-                  <ExploreIcon
-                     style={{ marginRight: "5px", color: "black", fontSize: "25px" }}
-                  />
                   <span className="icon-text">
                      PRODUCTS
                   </span>
                </Item>
             </Grid>
             <Grid
-               xs={1} sm={2} md={2}
+               xs={1} sm={2} md={3}
                container
                direction="row"
                justifyContent="center"
                alignItems="center"
+
             >
-               <Item to={componentToRenderOrder}>
-                  <ShoppingCartIcon
-                     style={{ marginRight: "5px", color: "black", fontSize: "25px" }}
+               <Item to={'/explore'} style={{ marginLeft: "10%" }}>
+                  <ExploreIcon
+                     style={{ marginRight: "5px",  fontSize: "25px" }}
                   />
                   <span className="icon-text">
-                     ORDERS
+                     EXPLORE
+                  </span>
+               </Item>
+            </Grid>
+            <Grid
+               container
+               direction="row"
+               justifyContent="center"
+               alignItems="center"
+               xs={1} sm={2} md={3}
+            >
+               <Item to='/user-orders'>
+                  <Badge badgeContent={5} color="success">
+                     <ShoppingCartIcon
+                        style={{ marginRight: "5px",  fontSize: "25px" }}
+                     />
+                  </Badge>
+                  <span className="icon-text" style={{marginLeft:'10px'}}>
+                     CART
                   </span>
                </Item>
             </Grid>
          </Grid>
 
       </Grid>)
-
-
-
 
 
    return (
@@ -279,7 +151,7 @@ const Navbar = () => {
          className="navbar"
       >
          <div className="navBack"></div>
-         {authNavItems}
+         {navItems}
       </Box>
    );
 };
