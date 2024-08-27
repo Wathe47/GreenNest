@@ -10,34 +10,16 @@ import * as api from "../../api/index.js";
 export const fetchOrders = () => async (dispatch) => {
    try {
       const { data } = await api.fetchOrders();
-      // console.log(data);
 
       dispatch({ type: FETCH_ORDERS, payload: data });
+
+      return Promise.resolve(data);
    } catch (error) {
       console.log(error);
+
+      return Promise.reject(error);
    }
 };
-
-export const fetchOrderByEmail = (email) => async (dispatch) => {
-   try {
-      const { data } = await api.fetchOrderByEmail(email);
-      console.log(data);
-      dispatch({ type: FETCH_ORDER_BY_EMAIL, payload: data });
-   } catch (error) {
-      console.log(error);
-   }
-};
-
-export const fetchOrderBymanufacturerEmail = (email) => async (dispatch) => {
-   try {
-      const { data } = await api.fetchOrderBymanufacturerEmail(email);
-      console.log(data);
-      dispatch({ type: FETCH_ORDER_BY_EMAIL, payload: data });
-   } catch (error) {
-      console.log(error);
-   }
-};
-
 
 
 
@@ -71,4 +53,3 @@ export const updateOrder = (id, updatedOrderData) => async (dispatch) => {
 };
 
 
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" /> 

@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,15 +27,6 @@ public class OrderService {
     public Optional<Order> getOrderById(Long id) {
         return orderRepository.findById(id);
     }
-
-    public List<Order> getOrdersByCustomerEmail(String customerEmail) {
-        return orderRepository.findByCustomerEmail(customerEmail);
-    }
-
-    public List<Order> getOrdersByManufacturerEmail(String email) {
-        return orderRepository.findByManufacturerEmail(email);
-    }
-
 
 
     public void addNewOrder(Order order) {

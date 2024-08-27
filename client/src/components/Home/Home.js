@@ -4,91 +4,114 @@ import { fetchProducts } from "../../redux/actions/product";
 import styled from "@mui/system/styled";
 import { Link } from "react-router-dom";
 import "./style.css";
-import Loading from "../Loading/Loading";
-import { useAuthContext } from "@asgardeo/auth-react";
-
-import { Button, Container, Card, CardContent, CardMedia, Typography, Grid, Pagination, Box, RadioGroup, FormControl, FormLabel, Paper, FormControlLabel, BottomNavigation, BottomNavigationAction } from "@mui/material";
-import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import Explore from "@mui/icons-material/Explore";
-import ProductList from "../Explore/Explore";
-
+import { Button, Container, Card, CardContent, CardMedia, Typography, Grid, Box } from "@mui/material";
 
 const Home = () => {
    const dispatch = useDispatch();
    const products = useSelector((state) => state.products);
-   const { state, getBasicUserInfo } = useAuthContext();
-   const [userDetails, setUserDetails] = useState(null);
    const [currentPage, setCurrentPage] = useState(1);
-   const itemsPerPage = 16; 
- 
- 
+   const itemsPerPage = 16;
    const count = Math.ceil(products.length / itemsPerPage);
- 
    const indexOfLastItem = currentPage * itemsPerPage;
    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
    const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
- 
-   const handlePageChange = (event, value) => {
-     setCurrentPage(value);
-   };
 
-   const Item = styled("div")(({ theme }) => ({
-      backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-      border: "0px solid",
-      borderColor: theme.palette.mode === "dark" ? "#444d58" : "#ced7e0",
-      padding: theme.spacing(1),
-      borderRadius: "50px",
-      height: "10px",
-      textAlign: "center",
-   }));
+   const handlePageChange = (event, value) => {
+      setCurrentPage(value);
+   };
 
    const teaProducts = [
       {
          id: 1,
          title: "Green Tea Bliss",
          description: "Experience the serene flavor of our premium Green Tea Bliss. Rich in antioxidants, this tea promotes health and wellness with every sip.",
-         imageUrl: "https://bizenglish.adaderana.lk/wp-content/uploads/Pluckers-at-a-tea-estate1-1.jpg"
+         imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqDhl4NLhMIX_FCpluvYy44cGfZDP3t4worw&s"
       },
       {
          id: 2,
          title: "Chamomile Calm",
          description: "Unwind with our Chamomile Calm tea. Known for its soothing properties, this tea is perfect for relaxing after a long day.",
-         imageUrl: "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/cs%2F2022%2FAT%2FYogi%20Tea%2FSC%20Workshop%2FStocksy_txpc79ae61fqZL300_Medium_798998"
+         imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ngggPC_1hfXxT2g0hi5iKVTp1g2-4KjxqQ&s"
       },
       {
          id: 3,
          title: "Earl Grey Elegance",
          description: "Indulge in the classic taste of our Earl Grey Elegance. Infused with bergamot, this tea offers a refreshing and aromatic experience.",
-         imageUrl: "https://www.ethicaltrade.org/sites/default/files/styles/letterbox_full_bp_med_1x/public/images/tea%20field%201.jpg?itok=1VIlKzH8"
+         imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo3Ps9yLLlhwV1wP0eVaiumlqGwCXQtpC2sw&s"
       }
    ];
-
-
 
    useEffect(() => {
       dispatch(fetchProducts());
    }, [dispatch]);
 
-   const welcomeNote =  (
-      <Typography variant="h4" gutterBottom style={{ marginBottom: "10%", marginTop: "20%", fontFamily: "poppins", fontSize: '60px', fontWeight: "bold", textShadow: "4px 4px 25px grey" }}>
-         Welcome to <span style={{ fontSize: "85px" }}> GreenNest </span>
+   const welcomeNote = (
+      <Typography variant="h4" gutterBottom sx={{
+         marginBottom: "22%",
+         marginTop: "12%",
+         fontFamily: "poppins",
+         fontSize: '40px',
+         color: "#D6D5CA"  // Make the text white
+      }}>
+         Welcome to <span style={{
+            fontSize: "85px", color: 'white', fontWeight: "bold",
+            textShadow: "4px 4px 25px grey",
+         }}> GreenNest </span>
       </Typography>
-   )
+   );
 
    return (
       <div>
-         <div style={{ backgroundImage: `url('https://res.cloudinary.com/dl8dikngu/image/upload/v1716977653/macro-photograph-of-a-tea-cup-filled-with-steeping-tea-tendrils-of-mist-rising-from-the-surface-te_skqcwx.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <Container maxWidth="xl" style={{ minHeight: '100vh', display: 'flex', alignItems: 'left', justifyContent: 'space-between' }}>
-
+         <div style={{
+            backgroundImage: `url('https://www.marthastewart.com/thmb/RFXrMCdRQfHyjOBbb6lAuQ-x2JQ=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/houseplants-getty-0820-226e798aabf040edb584602e2c5dfd3b.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            position: 'relative', // Position relative for the gradient overlay
+         }}>
+            <div style={{
+               position: 'absolute', // Position the gradient overlay
+               top: 0,
+               left: 0,
+               width: '100%',
+               height: '100%',
+               background: 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3))', // Dark gradient from left to right
+               zIndex: 1 // Ensure the overlay is above the background image
+            }} />
+            <Container maxWidth="xl" style={{
+               minHeight: '100vh',
+               display: 'flex',
+               alignItems: 'left',
+               justifyContent: 'space-between',
+               position: 'relative', // Position relative for the text
+               zIndex: 2 // Ensure the text is above the gradient overlay
+            }}>
                <div style={{ width: "40%" }}>
                   <div style={{ marginLeft: '50px' }}>
-
-                  </div>{welcomeNote}<div >
-                     <Typography variant="body1" paragraph style={{ marginBottom: "5%", fontFamily: "poppins", fontSize: "20px", fontWeight: "400", marginLeft: "50px" }}>
+                  </div>{welcomeNote}
+                  <div>
+                     <Typography variant="body1" paragraph sx={{
+                        fontFamily: "poppins",
+                        fontSize: "20px",
+                        fontWeight: "400",
+                        marginLeft: "50px",
+                        color: "white"  // Make the text white
+                     }}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel metus quis velit bibendum tristique vel nec arcu. Integer volutpat tellus quis orci consequat, ac aliquam nunc ultrices.
                      </Typography>
                      <Link to="/explore" style={{ textDecoration: "none" }}>
-                        <Button variant="contained" style={{ backgroundColor: "#007F12", color: "white", fontWeight: "600", fontSize: "16px", borderRadius: "10px", padding: "10px 30px", marginLeft: "50px", marginTop: "50px" }}>
+                        <Button variant="contained" sx={{
+                           backgroundColor: "#007F12",
+                           color: "white",
+                           fontWeight: "600",
+                           fontSize: "16px",
+                           borderRadius: "10px",
+                           padding: "10px 30px",
+                           marginLeft: "50px",
+                           marginTop: "5%",
+                           '&:hover': {
+                              backgroundColor: "#005A0E", // Change to your desired hover color
+                            },
+                        }}>
                            Get Started
                         </Button>
                      </Link>
@@ -96,7 +119,6 @@ const Home = () => {
                </div>
             </Container>
          </div>
-
 
          <Box sx={{ flexGrow: 1, padding: '20px', width: '80%', margin: '100px auto' }}>
             <Grid container direction='row' justifyContent="space-around" alignItems='center' sx={{ marginLeft: '80px' }}>
@@ -114,11 +136,11 @@ const Home = () => {
                               {product.title}
                            </Typography>
                            <Typography variant="body2" color="text.secondary">
-                              {product.description}
+                              {product.description}   
                            </Typography>
                         </CardContent>
                         <Link style={{ textDecoration: 'none', marginBottom: '20px' }}>
-                           <Button variant="contained" size="small" style={{ backgroundColor: "#94ba20", color: "white", fontWeight: "600", fontSize: "13px", borderRadius: "10px", padding: "5px 20px", margin: "15px 0px" }}>
+                           <Button variant="contained" size="small" style={{ backgroundColor: "#005A0E", color: "white", fontWeight: "600", fontSize: "13px", borderRadius: "10px", padding: "5px 20px", margin: "15px 0px" }}>
                               Read More
                            </Button>
                         </Link>
@@ -127,14 +149,8 @@ const Home = () => {
                ))}
             </Grid>
          </Box>
-         
-         <ProductList/>
-
       </div>
    );
 };
 
 export default Home;
-
-
-

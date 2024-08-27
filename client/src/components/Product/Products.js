@@ -24,11 +24,10 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import { CloseIcon } from "@mantine/core";
 
-const AddProductInfoForm = () => {
+const Products = () => {
    const [errors, setErrors] = useState({});
    const specificEmail = JSON.parse(window.localStorage.getItem("user")).email;
-   const allProducts = useSelector((state) => state.products);
-   const products = allProducts.filter(product => product.manufacturerEmail === specificEmail);
+   const products = useSelector((state) => state.products);
    const [showAlert, setShowAlert] = useState(false);
 
    const [productData, setProductData] = useState({
@@ -100,7 +99,7 @@ const AddProductInfoForm = () => {
          name: clickedProduct.name,
          price: clickedProduct.price,
          description: clickedProduct.description,
-         imageUrls: clickedProduct.imageUrls, 
+         imageUrls: clickedProduct.imageUrls,
          quantity: clickedProduct.quantity,
       });
 
@@ -114,7 +113,7 @@ const AddProductInfoForm = () => {
    };
 
    const addImageURL = () => {
-      const newImageURL = prompt("Enter a new image URL"); 
+      const newImageURL = prompt("Enter a new image URL");
       if (newImageURL) {
          setProductData((prevData) => ({
             ...prevData,
@@ -128,7 +127,7 @@ const AddProductInfoForm = () => {
          const timer = setTimeout(() => {
             setShowAlert(false);
          }, 5000);
-         return () => clearTimeout(timer); 
+         return () => clearTimeout(timer);
       }
    }, [showAlert]);
 
@@ -145,6 +144,7 @@ const AddProductInfoForm = () => {
                   fontWeight: "600",
                   marginTop: "50px",
                   fontWeight: "bold",
+                  color:'#3C2E19'
                }}
             >
                MY PRODUCTS
@@ -182,7 +182,7 @@ const AddProductInfoForm = () => {
                color="secondary"
                onClick={clear}
                style={{
-                  background: "#94ba20",
+                  background: "#005A0E",
                   borderRadius: "20px",
                   marginTop: "-30px",
                   marginBottom: "-120px",
@@ -211,7 +211,8 @@ const AddProductInfoForm = () => {
                paddingLeft: '80px',
                margin: 'auto',
                mt: 10,
-               background: '#ebebeb',
+               background: '#D6D5CA',
+               borderRadius: '10px',   
             }}
          >
             {products.map((product) => (
@@ -274,7 +275,7 @@ const AddProductInfoForm = () => {
                      onClick={() => handleCardClick(product)}
                      size="small"
                      style={{
-                        background: '#94ba20',
+                        background: '#005A0E',
                         marginBottom: '0px',
                         color: 'white',
                         fontSize: 'small',
@@ -463,7 +464,7 @@ const AddProductInfoForm = () => {
                   onClick={handleSubmit}
                   type="submit"
                   style={{
-                     background: "#94ba20",
+                     background: "#005A0E",
                      borderRadius: "20px",
                      border: "none",
                      marginTop: "-10px",
@@ -483,7 +484,7 @@ const AddProductInfoForm = () => {
                      background: "white",
                      borderRadius: "20px",
                      marginTop: "-5px",
-                     color: "#94ba20",
+                     color: "#005A0E",
                      fontSize: "13px",
                   }}
                   fullWidth
@@ -497,4 +498,4 @@ const AddProductInfoForm = () => {
    );
 };
 
-export default AddProductInfoForm;
+export default Products;

@@ -31,22 +31,10 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
-
-    @GetMapping("/fetch-by-customer-email/{email}")
-    public List<Order> getOrdersByCustomerEmail(@PathVariable String email) {
-        return orderService.getOrdersByCustomerEmail(email);
-    }
-
-    @GetMapping("/fetch-by-manufacturer-email/{email}")
-    public List<Order> getOrdersByManufacturerEmail(@PathVariable String email) {
-        return orderService.getOrdersByManufacturerEmail(email);
-    }
-
-
     @PostMapping("/add")
     public void addNewOrder(@RequestBody Order order) {
         try {
-            String inventoryUrl = "http://localhost:9001/api/v1/inventory/add-new-order";
+            String inventoryUrl = "http://localhost:9091/api/v1/inventory/add-new-order";
             restTemplate.postForEntity(inventoryUrl, order, Long.class);
         } catch (RestClientException e) {
             System.out.println("RestClientException: " + e.toString());
@@ -67,7 +55,7 @@ public class OrderController {
     public void updateOrder(@PathVariable("orderId") Long orderId,
                             @RequestBody Order order) {
         try {
-            String inventoryUrl = "http://localhost:9001/api/v1/inventory/update-order";
+            String inventoryUrl = "http://localhost:9091/api/v1/inventory/update-order";
             restTemplate.postForEntity(inventoryUrl, order, Long.class);
         } catch (RestClientException e) {
             System.out.println("RestClientException: " + e.toString());

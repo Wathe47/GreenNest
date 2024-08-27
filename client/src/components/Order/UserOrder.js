@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useAuthContext } from "@asgardeo/auth-react";
 
 import "./styles.css";
@@ -11,47 +11,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import Loading from "../Loading/Loading";
-import { fetchOrderByEmail } from "../../redux/actions/order";
+import { fetchOrders } from "../../redux/actions/order";
 import OrderCard from "./OrderCard";
+import { Link } from "react-router-dom";
 
 const UserOrder = () => {
    const dispatch = useDispatch();
-
-
    const ordersData = useSelector((state) => state.order.orders);
 
-   const { state } = useAuthContext();
-
-   const userData = JSON.parse(window.localStorage.getItem("user"));
-   const email = userData?.email; 
-   const isUser = userData?.groups?.includes("USER");
-
    useEffect(() => {
-      dispatch(fetchOrderByEmail(email));
-   }, [dispatch, email]);
+      dispatch(fetchOrders());
+   }, [dispatch]);
 
-   const isSignup = state?.isAuthenticated;
 
    if (!ordersData[0]) {
       return <Loading />;
    }
-   if (!isSignup) {
-      return (
-         <div>
-            <Loading />
-            <div
-               style={{
-                  marginTop: "20px",
-                  fontSize: "30px",
-                  fontFamily: "playlist",
-                  color: "green",
-               }}
-            >
-               Sign In First!
-            </div>
-         </div>
-      );
-   }
+
 
    return (
       <div
@@ -66,6 +42,56 @@ const UserOrder = () => {
             alt="background"
             className="product--background"
          />
+         <Grid container spacing={2}>
+            <Grid
+               item
+               md={4}
+               container
+               alignItems="center"
+               justifyContent="center"
+            >
+               <Typography variant="h4" gutterBottom>
+                Orders count : {ordersData.length}
+               </Typography>
+            </Grid>
+            <Grid
+               item
+               md={4}
+               container
+               alignItems="center"
+               justifyContent="center"
+            >
+               <Typography variant="h4" gutterBottom>
+               Total : $ {ordersData.reduce((acc, order) => acc + order.totalPrice, 0)}
+               </Typography>           
+                </Grid>
+            <Grid
+               item
+               md={4}
+               container
+               alignItems="center"
+               justifyContent="center"
+            >
+                        <Link to="/explore" style={{ color: "whitbacle" }}>
+            <Button
+               sx={{ my: 0 }}
+               variant="filled"
+               color="secondary"
+               style={{
+                  background: "#005A0E",
+                  borderRadius: "20px",
+                  color: "white",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+               }}
+            >
+              Continue Shopping
+
+            </Button>
+         </Link>
+            </Grid>
+
+         </Grid>
          <div style={{ marginTop: "100px" }}>
             <Grid container spacing={2}>
                <Grid
@@ -80,16 +106,11 @@ const UserOrder = () => {
                      <Grid item xs={12}>
                         <OrderCard
                            id={order.id}
-                           userName={userData.username}
-                           userId={userData.userid}
                            productId={order.productId}
                            productName={order.productName}
                            unitPrice={order.unitPrice}
-                           customerEmail={order.customerEmail}
                            totalPrice={order.totalPrice}
                            quantity={order.quantity}
-                           isUser={isUser}
-
                         />
                      </Grid>
                   ))}

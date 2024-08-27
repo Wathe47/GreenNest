@@ -1,5 +1,5 @@
 import Box from "@mui/system/Box";
-import React from "react";
+import React, { useEffect } from "react";
 
 import ExploreIcon from "@mui/icons-material/Explore";
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -12,6 +12,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import "./styles.css";
 import logo1 from '../../resources/logo1.png'
+import logo4 from '../../resources/logo4.png'
+import { useDispatch } from "react-redux";
+import { fetchOrders } from "../../redux/actions/order";
 
 
 const mode = "light"; // Replace with your desired mode (either "dark" or "light")
@@ -30,17 +33,29 @@ const Item = styled(Link)(({ theme }) => ({
    alignItems: "center",
    transition: "color 0.3s", // Add color transition for text
    "&:hover": {
-     color: "#007F12 ", // Change text color on hover
-     "& svg": { // Target the icon class from MUI
-       color: "#007F12", // Change icon color on hover
-       transition: "color 0.3s", // Add color transition for icons
-     },
+      color: "#007F12 ", // Change text color on hover
+      "& svg": { // Target the icon class from MUI
+         color: "#007F12", // Change icon color on hover
+         transition: "color 0.3s", // Add color transition for icons
+      },
    },
- }));
- 
+}));
+
 
 
 const Navbar = () => {
+
+   const dispatch = useDispatch();
+   const [orderCount, setOrderCount] = React.useState(0);
+
+   useEffect(() => {
+      dispatch(fetchOrders())
+      .then((result) => {
+         setOrderCount(result.length);
+      }).catch((err) => {
+         console.log(err);
+      });
+   }, [dispatch]);
 
 
    const navItems = (
@@ -52,7 +67,30 @@ const Navbar = () => {
          columns={{ xs: 12, sm: 16, md: 24 }}
       >
          <Grid
-            xs={4} sm={8} md={16}
+            xs={4} sm={8} md={4}
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+         >
+            <Link to='/'>
+               <img
+                  src={logo4}
+                  alt="GreenNest"
+                  height="45px"
+
+                  style={{
+                     marginTop: "9%",
+                     marginBottom: "7%",
+                     objectFit: "cover",
+                     position: "relative",
+                     top: "0px",
+                  }}
+               />
+            </Link>
+         </Grid>
+         <Grid
+            xs={4} sm={8} md={12}
             container
             direction="row"
             justifyContent="flex-start"
@@ -67,7 +105,6 @@ const Navbar = () => {
                   style={{
                      marginTop: "9%",
                      marginBottom: "7%",
-                     marginLeft: "70%",
                      objectFit: "cover",
                      position: "relative",
                      top: "0px",
@@ -88,9 +125,9 @@ const Navbar = () => {
                alignItems="center"
 
             >
-               <Item to='/' style={{ marginLeft: "10%" }}>
+               <Item to='/products' style={{ marginLeft: "10%" }}>
                   <InventoryIcon
-                     style={{ marginRight: "5px", fontSize: "25px"}}
+                     style={{ marginRight: "5px", fontSize: "25px" }}
                   />
 
                   <span className="icon-text">
@@ -108,7 +145,7 @@ const Navbar = () => {
             >
                <Item to={'/explore'} style={{ marginLeft: "10%" }}>
                   <ExploreIcon
-                     style={{ marginRight: "5px",  fontSize: "25px" }}
+                     style={{ marginRight: "5px", fontSize: "25px" }}
                   />
                   <span className="icon-text">
                      EXPLORE
@@ -123,12 +160,12 @@ const Navbar = () => {
                xs={1} sm={2} md={3}
             >
                <Item to='/user-orders'>
-                  <Badge badgeContent={5} color="success">
+                  <Badge badgeContent={orderCount} color="success">
                      <ShoppingCartIcon
-                        style={{ marginRight: "5px",  fontSize: "25px" }}
+                        style={{ marginRight: "5px", fontSize: "25px" }}
                      />
                   </Badge>
-                  <span className="icon-text" style={{marginLeft:'10px'}}>
+                  <span className="icon-text" style={{ marginLeft: '10px' }}>
                      CART
                   </span>
                </Item>

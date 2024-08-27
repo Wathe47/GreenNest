@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -25,13 +23,11 @@ public class Order {
             generator = "order_sequence"
     )
     private long id;
-    private String customerEmail;
     private long productId;
     private String productName;
     private long unitPrice;
     private long totalPrice;
     private long quantity;
     private long oldQuantity;
-    private String manufacturerEmail;
 
 }
