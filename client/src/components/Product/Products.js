@@ -26,7 +26,6 @@ import { CloseIcon } from "@mantine/core";
 
 const Products = () => {
    const [errors, setErrors] = useState({});
-   const specificEmail = JSON.parse(window.localStorage.getItem("user")).email;
    const products = useSelector((state) => state.products);
    const [showAlert, setShowAlert] = useState(false);
 
