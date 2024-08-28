@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY target/Order-0.0.1-SNAPSHOT.jar /app/order-service.jar
+COPY target/Order-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port that the application will run on
 EXPOSE 9092
 
 # Define the command to run the application
-CMD ["java", "-jar", "order-service.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
