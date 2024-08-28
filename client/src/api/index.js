@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const inventoryBaseURL = "http://localhost:9091";
-const orderBaseURL = "http://localhost:9092";
+// const inventoryBaseURL = "http://localhost:9091";
+// const orderBaseURL = "http://localhost:9092";
+
+const inventoryBaseURL = "https://greennest-inventory.onrender.com";
+const orderBaseURL = "https://greennest-order.onrender.com";
 
 
 const inventoryAPI = axios.create({
