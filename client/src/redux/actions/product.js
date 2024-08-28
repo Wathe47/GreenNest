@@ -3,7 +3,6 @@ import {
    CREATE_PRODUCT,
    UPDATE_PRODUCT,
    FETCH_PRODUCTS_BY_ID,
-   ADD_DISCOUNT,
 } from "../constants/actionTypes.js";
 import * as api from "../../api/index.js";
 

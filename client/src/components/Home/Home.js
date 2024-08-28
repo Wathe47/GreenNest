@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../redux/actions/product";
-import styled from "@mui/system/styled";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { Button, Container, Card, CardContent, CardMedia, Typography, Grid, Box } from "@mui/material";
 
 const Home = () => {
    const dispatch = useDispatch();
-   const products = useSelector((state) => state.products);
-   const [currentPage, setCurrentPage] = useState(1);
-   const itemsPerPage = 16;
-   const count = Math.ceil(products.length / itemsPerPage);
-   const indexOfLastItem = currentPage * itemsPerPage;
-   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-
-   const handlePageChange = (event, value) => {
-      setCurrentPage(value);
-   };
 
    const teaProducts = [
       {

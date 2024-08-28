@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
 import EditOrder from "./EditOrder"; // Import the EditOrder component
 
 
@@ -20,8 +19,6 @@ const OrderCard = ({
 }) => {
 
    const [isEditModalOpen, setEditModalOpen] = useState(false);
-   const dispatch = useDispatch();
-   const orders = useSelector((state) => state.order.orders);
 
    const handleEditClick = () => {
       setEditModalOpen(true);

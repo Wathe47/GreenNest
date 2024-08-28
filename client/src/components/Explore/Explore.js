@@ -41,7 +41,6 @@ const ProductList = () => {
                variant="h4"
                style={{
                   fontFamily: "Poppins",
-                  fontWeight: "600",
                   marginTop: "50px",
                   fontWeight: "bold",
                }}

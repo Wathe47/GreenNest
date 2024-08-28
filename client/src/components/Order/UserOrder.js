@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Grid, Typography } from "@mui/material";
-import { useAuthContext } from "@asgardeo/auth-react";
 
 import "./styles.css";
 

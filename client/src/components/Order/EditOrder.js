@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateOrder, deleteOrder } from "../../redux/actions/order";
+import { updateOrder } from "../../redux/actions/order";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const initialState = {

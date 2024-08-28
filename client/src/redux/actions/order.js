@@ -3,7 +3,6 @@ import {
    ADD_ORDER,
    DELETE_ORDER,
    UPDATE_ORDER,
-   FETCH_ORDER_BY_EMAIL,
 } from "../constants/actionTypes";
 import * as api from "../../api/index.js";
 

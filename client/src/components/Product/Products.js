@@ -9,9 +9,7 @@ import {
    Card,
    CardMedia,
    CardContent,
-   Collapse,
    Alert,
-   IconButton,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,7 +20,6 @@ import {
 import { Link } from "react-router-dom";
 
 import "./styles.css";
-import { CloseIcon } from "@mantine/core";
 
 const Products = () => {
    const [errors, setErrors] = useState({});
@@ -111,15 +108,6 @@ const Products = () => {
       });
    };
 
-   const addImageURL = () => {
-      const newImageURL = prompt("Enter a new image URL");
-      if (newImageURL) {
-         setProductData((prevData) => ({
-            ...prevData,
-            imageUrls: [...prevData.imageUrls, newImageURL],
-         }));
-      }
-   };
 
    useEffect(() => {
       if (showAlert) {
@@ -140,7 +128,6 @@ const Products = () => {
                variant="h4"
                style={{
                   fontFamily: "Poppins",
-                  fontWeight: "600",
                   marginTop: "50px",
                   fontWeight: "bold",
                   color:'#3C2E19'

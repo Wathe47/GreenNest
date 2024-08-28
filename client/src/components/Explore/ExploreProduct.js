@@ -34,7 +34,6 @@ const ImageCarousel = () => {
    }
 
    const handleChange = (e) => {
-      const currentDate = new Date();
       const quantity = parseInt(e.target.value, 10);
       setFormData({
          ...formData,
