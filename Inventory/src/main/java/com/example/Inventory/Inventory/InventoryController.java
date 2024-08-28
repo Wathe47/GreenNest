@@ -1,6 +1,5 @@
 package com.example.Inventory.Inventory;
 
-import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

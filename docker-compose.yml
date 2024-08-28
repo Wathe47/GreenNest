@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: greennest
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+
+  inventory-service:
+    build: ./Inventory
+    ports:
+      - "9091:9091"
+    environment:
+      - DATABASE_URL=jdbc:mysql://db:3306/greennest
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin123
+    networks:
+      - app-network
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "8082:8082"
+    environment:
+      - DATABASE_URL=jdbc:mysql://db:3306/greennest
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin123
+    networks:
+      - app-network
+
+  frontend:
+    build: ./client
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
