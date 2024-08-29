@@ -117,6 +117,7 @@ const Navbar = () => {
             container
             columns={{ xs: 3, sm: 6, md: 10 }}
          >
+
             <Grid
                xs={1} sm={2} md={3}
                container
@@ -125,13 +126,12 @@ const Navbar = () => {
                alignItems="center"
 
             >
-               <Item to='/products' style={{ marginLeft: "10%" }}>
-                  <InventoryIcon
+               <Item to={'/explore'} style={{ marginLeft: "10%" }}>
+                  <ExploreIcon
                      style={{ marginRight: "5px", fontSize: "25px" }}
                   />
-
                   <span className="icon-text">
-                     PRODUCTS
+                     EXPLORE
                   </span>
                </Item>
             </Grid>
@@ -143,12 +143,13 @@ const Navbar = () => {
                alignItems="center"
 
             >
-               <Item to={'/explore'} style={{ marginLeft: "10%" }}>
-                  <ExploreIcon
+               <Item to='/products' style={{ marginLeft: "10%" }}>
+                  <InventoryIcon
                      style={{ marginRight: "5px", fontSize: "25px" }}
                   />
+
                   <span className="icon-text">
-                     EXPLORE
+                     PRODUCTS
                   </span>
                </Item>
             </Grid>
