@@ -84,8 +84,8 @@ const Home = () => {
                         marginLeft: "50px",
                         color: "white"  // Make the text white
                      }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel metus quis velit bibendum tristique vel nec arcu. Integer volutpat tellus quis orci consequat, ac aliquam nunc ultrices.
-                     </Typography>
+                        GreenNest is an e-commerce website dedicated to houseplants, offering a diverse selection of indoor greenery to enhance your living spaces. Whether you're a seasoned plant enthusiast or just starting, GreenNest provides an array of houseplants, from easy-to-care-for succulents to rare tropical varieties.                   
+                        </Typography>
                      <Link to="/explore" style={{ textDecoration: "none" }}>
                         <Button variant="contained" sx={{
                            backgroundColor: "#007F12",
