@@ -32,8 +32,10 @@ const EditOrder = ({ order, onClose }) => {
          cancelled: true,
       };
 
-      dispatch(updateOrder(order.id, updatedOrder));
+      // dispatch(updateOrder(order.id, updatedOrder));
+      dispatch(deleteOrder(order.id));
       onClose();
+      window.location.reload();
    };
 
    return (
