@@ -64,7 +64,7 @@ const ProductList = () => {
          <div className="product-list-container" style={{ background: "#D6D5CA", margin: "40px auto", padding: "20px", width: '90%' }}>
             <Grid container spacing={3} justifyContent="space-around" sx={{ margin: "10px" }}  >
                {currentItems.map((product) => (
-                  <Grid item key={product.id} xs={6} sm={4} md={3} lg={3}>
+                  <Grid item key={product.id} xs={12} sm={12} md={6} lg={4}>
                      <Card sx={{ marginBottom: 5 }} elevation={0} className="explore--card" style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)", borderRadius: "15px", width: "350px" }}>
                         <Link to={`/explore/${product.id}`} style={{ textDecoration: "none" }}>
                            <CardMedia
