@@ -198,7 +198,7 @@ const Products = () => {
          </Link>
          {showAlert && (<Box sx={{ width: '100%', marginTop: '40px' }}>
             <Alert sx={{ mb: 2, width: '40%', margin: 'auto', padding: '0', marginTop: '20px', fontSize: '18px', }}>
-               Product has been added successfully!
+               Product has been Updated successfully!
             </Alert>
          </Box>)}
          <Box
